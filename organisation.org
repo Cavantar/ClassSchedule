@@ -1,0 +1,31 @@
+* TODOS
+** DONE Create basic display list !.
+   CLOSED: [2015-11-19 Thu 10:44]
+** DONE Forms for adding and editing without foreign constraints.
+   CLOSED: [2015-11-19 Thu 11:15]
+   - [X] Students.
+   - [X] Teachers.
+   - [X] ClassRooms.
+   - [X] SchoolClasses.
+   - [X] Plan.
+** DONE Add main page.
+   CLOSED: [2015-11-19 Thu 11:54]
+** DONE Add foreign constraints.
+   CLOSED: [2015-11-22 Sun 10:37]
+   - [X] Teachers, classrooms and schoolclasses don't need one.
+
+** DONE Add half hour select thing - should I even try (update - yes !).
+   CLOSED: [2015-11-22 Sun 11:50]
+** DONE Fix Bootstrap presentation.
+   CLOSED: [2015-11-24 Tue 11:49]
+** DONE Login Panel.
+   CLOSED: [2015-12-05 Sat 14:19]
+   - [X] Add Fields for logging purposes.
+   - [X] Create basic login page.
+   - [X] Create Appropriate logic.
+     - Teachers have admin flag.
+     - Students are only able to see and edit their data, along with assigned plan.
+
+** DONE Access restriction rules.
+   CLOSED: [2015-12-05 Sat 14:19]
+** TODO Fix Default Redirecion from Index Page.
