@@ -20,17 +20,17 @@
 
 <div class="form-group">
   {!! Form::label('week_day') !!}
-  {!! Form::select('week_day', $controller->getDayDropDown(), null, ["class" => 'form-control']) !!}
+  {!! Form::select('week_day', $controller->getDayDropDown(), (Input::get('day') != "" ? Input::get('day') : null), ["class" => 'form-control']) !!}
 </div>
 
 <div class="form-group">
   {!! Form::label('time_start') !!}
-  {!! Form::select('time_start', $controller->getHourDropDown(), null, ["class" => 'form-control']) !!}
+  {!! Form::select('time_start', $controller->getHourDropDown(), (Input::get('time_start') != "" ? Input::get('time_start') : null), ["class" => 'form-control']) !!}
 </div>
 
 <div class="form-group">
   {!! Form::label('time_end') !!}
-  {!! Form::select('time_end', $controller->getHourDropDown(), null, ["class" => 'form-control']) !!}
+  {!! Form::select('time_end', $controller->getHourDropDown(), (Input::get('time_end') != "" ? Input::get('time_end') : null), ["class" => 'form-control']) !!}
 </div>
 
 <div class="form-group">

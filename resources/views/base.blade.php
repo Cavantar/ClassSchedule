@@ -32,6 +32,7 @@
 	  <h4> Logged Out </h4>
 	@endif
       </div>
+
       <div class="well well-lg">
 	<ul class="nav nav-tabs">
 	  <li id="plan_tab"><a href="{{ URL::route('plan.index') }}">Plans</a></li>

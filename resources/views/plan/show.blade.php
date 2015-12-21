@@ -31,7 +31,14 @@
 
 	  </td>
 	  @for ($clm = 0; $clm < 7; $clm++)
-	    <td id="t{{$clm}}x{{$j + (($i - 8) * 2)}}"> </td>
+	    {{-- */ $fieldIdentifier = "t" .$clm ."x".($j + (($i - 8) * 2));/* --}}
+	    <td id="{{ $fieldIdentifier }}"
+		    @if (Session::get('admin'))
+		    onclick="addEntry('{{ $fieldIdentifier }}')"
+		    onmouseenter="setRandomColor('{{ $fieldIdentifier }}')"
+		    onmouseleave="resetColor('{{ $fieldIdentifier }}')"
+		    @endif
+		    > </td>
 	  @endfor
 	</tr>
 
@@ -76,6 +83,11 @@
     @endforeach
   ];
 
+  var dayArray = [];
+  @foreach ($controller->getDays() as $day)
+  dayArray.push("{{ $day }}");
+  @endforeach
+
   function parseTime(timeString)
   {
     timeArr = timeString.split(':');
@@ -90,6 +102,50 @@
   function randomColor()
   {
     return "rgb(" + parseInt(Math.random()*255)+", "+parseInt(Math.random()*255)+", "+parseInt(Math.random()*255) + ")";
+  }
+
+  function padZerosTwo(value)
+  {
+    return value > 9 ? value.toString() : 0 + value.toString();
+  }
+
+  function addEntry(cellIdentifier)
+  {
+    identifierValues = cellIdentifier.substr(1, cellIdentifier.length - 1);
+    valueIndexes = identifierValues.split("x");
+
+    column = parseInt(valueIndexes[0]);
+    row = parseInt(valueIndexes[1]);
+
+    timeStart = 8 + (0.5 * row);
+
+    timeStartString = getTimeString(timeStart);
+    timeEndString = getTimeString(timeStart + 0.5);
+
+    day = dayArray[column];
+
+    window.location.replace("/planentry/create?time_start=" + timeStartString + "&time_end=" + timeEndString + "&day=" + column);
+  }
+
+  function getTimeString(number)
+  {
+    var resultValue = "";
+    resultValue = padZerosTwo(Math.floor(number));
+    resultValue += ":";
+    resultValue += padZerosTwo((number % 1.0) * 60);
+    resultValue += ":00";
+    return resultValue;
+  }
+
+  function setRandomColor(cellIdentifier)
+  {
+    bgcolor = randomColorHex();
+    $("#" + cellIdentifier).css("background-color", "#" + bgcolor);
+  }
+
+  function resetColor(cellIdentifier)
+  {
+    $("#" + cellIdentifier).css("background-color", "#f5f5f5");
   }
 
   function hexDigitFromDec(value)
@@ -120,7 +176,6 @@
 
   function randomColorHex()
   {
-
     return getHexColorValue() + getHexColorValue() + getHexColorValue();
   }
 
@@ -136,6 +191,9 @@
 
     $("#t" + cell_id).css("background-color", "#" + bgcolor);
     $("#t" + cell_id).css("color", fontcolor);
+    $("#t" + cell_id).removeAttr("onmouseenter");
+    $("#t" + cell_id).removeAttr("onmouseleave");
+    $("#t" + cell_id).removeAttr("onclick");
 
     for(j = 1; j < rowSpan; j++)
     {
