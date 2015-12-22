@@ -6,16 +6,6 @@ class ProjectsTableSeeder extends Seeder {
 
   public function run()
   {
-    DB::table('students')->delete();
-    $students = array(
-      ['id' => 1, 'name' => 'Kevin', 'surname' => 'Durant', 'plan_id' => 1,
-	'email' => "durant@gmail.com", 'password' => Hash::make('one')],
-	['id' => 2, 'name' => 'Banan', 'surname' => 'Nana', 'plan_id' => 1,
-	  'email' => "nan@gmail.com", 'password' => Hash::make('one')],
-	['id' => 3, 'name' => 'Whats', 'surname' => 'GoingOn', 'plan_id' => 1,
-	  'email' => "goingon@gmail.com", 'password' => Hash::make('one')]
-    );
-    DB::table('students')->insert($students);
 
     DB::table('teachers')->delete();
     $teachers = array(
@@ -55,6 +45,17 @@ class ProjectsTableSeeder extends Seeder {
       ['plan_id' => 1, 'teacher_id' => 1, 'schoolclass_id' => 1, 'classroom_id' => 1, 'week_day' => 0, 'time_start' => '12:00:00', 'time_end' => '14:00:00']
     );
     DB::table('plan_entries')->insert($plan_entries);
+
+    DB::table('students')->delete();
+    $students = array(
+      ['id' => 1, 'name' => 'Kevin', 'surname' => 'Durant', 'plan_id' => 1,
+	'email' => "durant@gmail.com", 'password' => Hash::make('one')],
+	['id' => 2, 'name' => 'Banan', 'surname' => 'Nana', 'plan_id' => 1,
+	  'email' => "nan@gmail.com", 'password' => Hash::make('one')],
+	['id' => 3, 'name' => 'Whats', 'surname' => 'GoingOn', 'plan_id' => 1,
+	  'email' => "goingon@gmail.com", 'password' => Hash::make('one')]
+    );
+    DB::table('students')->insert($students);
 
   }
 }

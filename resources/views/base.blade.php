@@ -36,10 +36,13 @@
       <div class="well well-lg">
 	<ul class="nav nav-tabs">
 	  <li id="plan_tab"><a href="{{ URL::route('plan.index') }}">Plans</a></li>
-	  <li id="student_tab"><a href="{{ URL::route('student.index') }}">Students</a></li>
-	  <li id="teacher_tab"><a href="{{ URL::route('teacher.index') }}">Teachers</a></li>
-	  <li id="classroom_tab"><a href="{{ URL::route('classroom.index') }}">Classrooms</a></li>
-	  <li id="schoolclass_tab"><a href="{{ URL::route('schoolclass.index') }}">Schoolclasses</a></li>
+
+	  @if (Session::get('user_type') == "teacher")
+	    <li id="student_tab"><a href="{{ URL::route('student.index') }}">Students</a></li>
+	    <li id="teacher_tab"><a href="{{ URL::route('teacher.index') }}">Teachers</a></li>
+	    <li id="classroom_tab"><a href="{{ URL::route('classroom.index') }}">Classrooms</a></li>
+	    <li id="schoolclass_tab"><a href="{{ URL::route('schoolclass.index') }}">Schoolclasses</a></li>
+	  @endif
 	</ul>
 	<div class="tab-content">
 	  <br/>

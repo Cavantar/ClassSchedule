@@ -16,7 +16,6 @@ class CreateProjectsAndTasksTables extends Migration
       $table->increments('id');
       $table->string('name')->default('');
       $table->string('surname')->default('');
-      $table->integer('plan_id')->references('id')->on('plans')->onDelete('cascade');
 
       $table->string('email')->unique();
       $table->string('password', 60);
@@ -50,7 +49,9 @@ class CreateProjectsAndTasksTables extends Migration
 
     Schema::create('plan_entries', function (Blueprint $table) {
       $table->increments('id');
-      $table->integer('plan_id')->references('id')->on('plans')->onDelete('cascade');
+
+      $table->integer('plan_id')->unsigned()->default(0);
+      $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
 
       $table->integer('teacher_id')->unsigned()->default(0);
       $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
@@ -65,6 +66,11 @@ class CreateProjectsAndTasksTables extends Migration
       $table->time('time_start');
       $table->time('time_end');
     });
+
+    Schema::table('students', function ($table) {
+      $table->integer('plan_id')->unsigned()->default(0);
+      $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
+    });
   }
 
   /**
@@ -76,11 +82,11 @@ class CreateProjectsAndTasksTables extends Migration
   {
     /* */
     Schema::drop('plan_entries');
+    Schema::drop('students');
     Schema::drop('plans');
     Schema::drop('classrooms');
     Schema::drop('schoolclasses');
     Schema::drop('teachers');
-    Schema::drop('students');
 
   }
 }

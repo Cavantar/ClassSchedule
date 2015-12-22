@@ -23,9 +23,9 @@
       @if (Session::get('admin'))
 	<td>
 	  {!! Form::open([
-		    'method' => 'DELETE',
-		      'route' => ['planentry.destroy', $data['id']]
-		    ]) !!}
+		      'method' => 'DELETE',
+			'route' => ['planentry.destroy', $data['id']]
+		      ]) !!}
 	  <a href="{{ route('planentry.edit', $data['id']) }}" class="btn btn-primary">Edit</a>
 	  {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
 	  {!! Form::close() !!}
